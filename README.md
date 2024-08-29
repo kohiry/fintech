@@ -35,7 +35,7 @@ TO DO:
 - [ ] user scheme
 - [ ] ручки на транзакцию
 - [ ] вебхук от клиента
-- [ ] RPC коммуникация gateway и client_transaction
+- [ ] RPC коммуникация gateway и client_transaction (coming soon ...)
 - [ ] шардирование
 - [ ] создание очередей
 - [ ] балансировка шардов (coming soon...)
