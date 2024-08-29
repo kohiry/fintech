@@ -22,7 +22,7 @@
 исполнять на чистом rabbit.
 
 Схема микросервисов:
-api gateway -> (регистрируется url webhook)-> client_transaction -> AMPQ -> runner -> RPC -> api_gateway -> webhook post -> client 
+api gateway -> (регистрируется url webhook) + RPC -> client_transaction -> AMPQ -> runner -> RPC -> api_gateway -> webhook post -> client 
 
 К сожалению, в идеале добавить graphana для мониторинга шардов, что позволит
 более объективно реагировать на перегрузку, но я боюсь не хватит времени.
