@@ -26,3 +26,23 @@ api gateway -> (регистрируется url webhook) + RPC -> client_transa
 
 К сожалению, в идеале добавить graphana для мониторинга шардов, что позволит
 более объективно реагировать на перегрузку, но я боюсь не хватит времени.
+
+
+TO DO:
+- [ ] api gateway
+- [ ] jwt auth
+- [ ] ouath
+- [ ] user scheme
+- [ ] ручки на транзакцию
+- [ ] вебхук от клиента
+- [ ] RPC коммуникация gateway и client_transaction
+- [ ] шардирование
+- [ ] создание очередей
+- [ ] балансировка шардов (coming soon...)
+- [ ] обработка сообщения раннером
+- [ ] rpc ответ о завершении в gateway
+- [ ] gateway post webhook
+- [ ] client read this win/win!!
+- [ ] логгирование (coming soon)
+- [ ] тестирование (coming soon)
+- 
