@@ -22,3 +22,11 @@ class UserOut(BaseModel):
 class UserScheme(BaseModel):
     username: str
     password: str
+
+
+class UserRegister(UserScheme):
+    amount: int = 1000
+
+
+class CreatedUserMessage(BaseModel):
+    result: str = "User Created"

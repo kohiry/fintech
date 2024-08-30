@@ -6,7 +6,7 @@ from fastapi import Depends
 from jose import jwt
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from auth.scheme import TokenIn, TokenOut
+from auth.scheme import TokenIn, TokenOut, UserRegister
 from config import settings
 from auth.constants import oauth2_scheme
 
@@ -34,6 +34,15 @@ def jwt_decode(token: str) -> TokenIn:
         token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
     )
     return TokenIn.model_validate(dict_presents)
+
+
+async def create_user(user: UserRegister) -> int | None:
+    url = "http://user_service:8080/user/"
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, json=user.model_dump())
+        response.raise_for_status()  # Проверка на ошибки HTTP
+        user_db = response.json()
+        return user_db
 
 
 async def get_user_by_username(username: str) -> UserOut | None:
