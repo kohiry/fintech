@@ -9,7 +9,7 @@ user_crud_router = APIRouter(prefix="/user", tags=["User"])
 
 @user_crud_router.get("/")
 async def get_user_by_username_route(username: str) -> UserOut | None:
-    user = get_user_by_username(username)
+    user = await get_user_by_username(username)
     if not user:
         return None
     return user

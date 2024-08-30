@@ -3,16 +3,19 @@ from typing import Annotated
 from fastapi import FastAPI, Depends, APIRouter
 from starlette.middleware.cors import CORSMiddleware
 
+from user.router import user_crud_router
+
 # from transaction.router import tr_router
 # from transaction.scheme import TransactionScheme
 
 app = FastAPI()
+app.include_router(user_crud_router)
 # app.include_router(tr_router)
 
 origins = [
     "http://localhost",
     "http://localhost:8001",
-    "http://localhost:8000",
+    "http://api_gateway:8000",
 ]
 
 app.add_middleware(

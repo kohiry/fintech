@@ -19,7 +19,7 @@ from auth.constants import pwd_context
 
 def jwt_code(username: str) -> TokenOut:
     dict_present = TokenIn(
-        sub=username,
+        sub={'user': username}.__str__(),
         exp=datetime.now(timezone.utc)
         + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES),
     )
@@ -37,12 +37,16 @@ def jwt_decode(token: str) -> TokenIn:
 
 
 async def get_user_by_username(username: str) -> UserOut | None:
-    url = "http://localhost:8080/user"
+    url = "http://user_service:8080/user/"
 
     async with httpx.AsyncClient() as client:
-        response = await client.get(url)
+        response = await client.get(url, params={'username': username})
         response.raise_for_status()  # Проверка на ошибки HTTP
-        user_data = UserOut.model_validate(response.json())
+        user_db = response.json()
+        if not user_db:
+            print('Данные из UserService, не были получены')
+            return None
+        user_data = UserOut.model_validate(user_db)
         print('Данные из UserService', user_data)
         return user_data
 
