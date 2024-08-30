@@ -5,10 +5,17 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from user_service.config import settings
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 
+config.set_main_option("HOST", settings.P_HOST)
+config.set_main_option("PORT", str(settings.P_PORT))
+config.set_main_option("P_USER", settings.P_USER)
+config.set_main_option("P_PASS", settings.P_PASS)
+config.set_main_option("P_DB", settings.P_DB)
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:

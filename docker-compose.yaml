@@ -1,19 +1,21 @@
 services: 
   api-gateway:
     build:
+      dockerfile: Dockerfile.api_gateway
       context: .
     volumes:
-      - .:/backend
-    command: sh -c "uvicorn api_gateway.main:app --host 0.0.0.0 --port 8000 --reload"
+      - ./api_gateway:/backend
+    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
     restart: always
     ports:
       - "8000:8000"
   client_transaction:
     build:
+      dockerfile: Dockerfile.client_transaction
       context: .
     volumes:
-      - .:/backend
-    command: sh -c "uvicorn client_transaction.main:app --host 0.0.0.0 --port 8001 --reload"
+      - ./client_transaction:/backend
+    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8001 --reload"
     restart: always
     ports:
       - "8001:8001"
@@ -30,11 +32,14 @@ services:
 
   user_service:
     build:
+      dockerfile: Dockerfile.user_service
       context: .
     volumes:
-      - .:/backend
-      - .env:.env
-    command: sh -c "uvicorn user_service.main:app --host 0.0.0.0 --port 8080 --reload"
+      - ./user_service:/backend
+      - .env:/backend/.env
+    #command: sh -c "alembic --config user_service/alembic.ini upgrade head && uvicorn user_service.main:app --host 0.0.0.0 --port 8080 --reload"
+    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8080 --reload"
+
     restart: always
     ports:
       - "8080:8080"
