@@ -6,7 +6,6 @@ __pycache__/
 user_service/.env
 # C extensions
 *.so
-
 # Distribution / packaging
 .Python
 build/

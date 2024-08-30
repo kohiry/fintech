@@ -9,6 +9,8 @@ class UserScheme(BaseModel):
     amount: float = 1000.0  # узкое место, уверен есть более надеждные способы для хранения денег во float
 
 
+
+
 class TransactionStatus(Enum):
     SEND = 'SEND'
     FAILED = "FAILED"
