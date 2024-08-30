@@ -7,4 +7,34 @@ services:
     command: sh -c "uvicorn api_gateway.main:app --host 0.0.0.0 --port 8000 --reload"
     restart: always
     ports:
-      - "8000:8000"    
+      - "8000:8000"
+  client_transaction:
+    build:
+      context: .
+    volumes:
+      - .:/backend
+    command: sh -c "uvicorn client_transaction.main:app --host 0.0.0.0 --port 8001 --reload"
+    restart: always
+    ports:
+      - "8001:8001"
+
+  postgres:
+    image: postgres:14.2
+    environment:
+      POSTGRES_DB: ${P_DB}
+      POSTGRES_USER: ${P_USER}
+      POSTGRES_PASSWORD: ${P_PASS}
+    ports:
+      - "5432:5432"
+
+
+  user_service:
+    build:
+      context: .
+    volumes:
+      - .:/backend
+      - .env:.env
+    command: sh -c "uvicorn user_service.main:app --host 0.0.0.0 --port 8080 --reload"
+    restart: always
+    ports:
+      - "8080:8080"
