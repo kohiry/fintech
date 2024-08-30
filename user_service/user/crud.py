@@ -1,3 +1,6 @@
+from user_service.utils import get_connection
+
+
 async def create_user(username: str, amount: float) -> int:
     conn = await get_connection()
     try:
